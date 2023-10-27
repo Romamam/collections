@@ -13,12 +13,9 @@ target
 .settings
 .springBeans
 .sts4-cache
-<<<<<<< HEAD
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-=======
->>>>>>> d848db1 ( last version)
 
 ### NetBeans ###
 /nbproject/private/
