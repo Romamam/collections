@@ -1,4 +1,8 @@
-public class MyArrayList<T> implements MyCollection<T>{
+package Collections;
+
+import Interfaces.MyCollection;
+
+public class MyArrayList<T> implements MyCollection<T> {
     private Object[] array;
     private int size;
 
@@ -8,12 +12,13 @@ public class MyArrayList<T> implements MyCollection<T>{
         size = 0;
     }
     @Override
-    public void add(T element) {
+    public boolean add(T element) {
         if(size == array.length) {
             increaseCapacity();
         }
         array[size] = element;
         size++;
+        return true;
     }
 
     private void increaseCapacity() {
@@ -32,13 +37,13 @@ public class MyArrayList<T> implements MyCollection<T>{
     public boolean remove(T element) {
         for(int i = 0; i < array.length; i++){
             if(array[i] == element){
-                for(int k = i; k < array.length; k++){
+                for(int k = i; k < array.length-1; k++){
                     array[k] = array[k+1];
                 }
+                array[size - 1] = null;
+                size--;
+                return true;
             }
-            array[size - 1] = null;
-            size--;
-            return true;
         }
         return false;
     }
@@ -54,11 +59,7 @@ public class MyArrayList<T> implements MyCollection<T>{
     }
 
     @Override
-    public int size() {
-        int size = 0;
-        for(int i = 0; i < array.length; i++){
-            size++;
-        }
+    public int getSize() {
         return size;
     }
 

@@ -1,6 +1,9 @@
+package Collections;
+
+
 import java.util.Objects;
 
-public class LinkedList<T> implements MyCollection<T> {
+public class MyLinkedList<T> {
 
     static class Node<T>{
         T element;
@@ -15,19 +18,13 @@ public class LinkedList<T> implements MyCollection<T> {
     private Node<T> last;
     private int size;
 
-    @Override
+
     public void add(T element) {
-
-    }
-
-    @Override
-    public void add(T element, int index) {
         Node<T> newNode = new Node<>(element);
         if(size == 0){
             first = last = newNode;
         }
         else{
-            Node<T> prev = getNodeByIndex(index-1);
             last.next = newNode;
             last = newNode;
         }
@@ -47,7 +44,6 @@ public class LinkedList<T> implements MyCollection<T> {
         Node<T> node = getNodeByIndex(index);
         node.element = element;
     }
-    @Override
     public void add(int index, T element){
         Node<T> newNode = new Node<>(element);
         if(first == null){
@@ -59,21 +55,14 @@ public class LinkedList<T> implements MyCollection<T> {
             last.next = newNode;
             last = newNode;
         }else {
-            Node<T> current = first;
-            for (int i = 0; i < index; i++) {
-                current = current.next;
-            }
-            newNode.next = current.next;
-            current.next = newNode;
+            Node<T> prev = getNodeByIndex(index-1);
+            newNode.next = prev.next;
+            prev.next = newNode;
         }
+        size++;
     }
 
-    @Override
-    public boolean remove(T element) {
-        return false;
-    }
 
-    @Override
     public T remove(int index) {
         Objects.checkIndex(index, size);
         T removedElement = null;
@@ -95,7 +84,6 @@ public class LinkedList<T> implements MyCollection<T> {
         return removedElement;
     }
 
-    @Override
     public boolean contains(T element) {
         Node<T> current = first;
         for (int i = 0; i < size; i++) {
@@ -107,17 +95,17 @@ public class LinkedList<T> implements MyCollection<T> {
         return false;
     }
 
-    @Override
     public int size() {
-        return 0;
+        return size;
     }
 
-    @Override
     public boolean isEmpty() {
+        if(size == 0){
+            return true;
+        }
         return false;
     }
 
-    @Override
     public T get(int index) {
         return getNodeByIndex(index).element;
     }
