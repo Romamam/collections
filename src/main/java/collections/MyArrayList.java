@@ -36,7 +36,7 @@ public class MyArrayList<T> implements MyCollection<T> {
     @Override
     public boolean remove(T element) {
         for(int i = 0; i < array.length; i++){
-            if(array[i] == element){
+            if(array[i].equals(element)){
                 for(int k = i; k < array.length-1; k++){
                     array[k] = array[k+1];
                 }
@@ -44,6 +44,7 @@ public class MyArrayList<T> implements MyCollection<T> {
                 size--;
                 return true;
             }
+            else return false;
         }
         return false;
     }

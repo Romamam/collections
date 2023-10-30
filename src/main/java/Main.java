@@ -1,6 +1,6 @@
-import collections.MyHashMap.Key;
-import collections.MyHashMap.MyHashMap;
-import collections.MyHashMap.Value;
+import collections.myHashMap.Key;
+import collections.myHashMap.MyHashMap;
+import collections.myHashMap.Value;
 
 
 public class Main {

@@ -28,6 +28,7 @@ class MyArrayListTest {
         assertTrue(list.remove(1));
         assertEquals(1,list.getSize());
         assertFalse(list.remove(3));
+        assertFalse(list.remove(5));
 
     }
 
@@ -37,10 +38,12 @@ class MyArrayListTest {
 
         list.add(1);
         list.add(2);
+        list.add(null);
 
         assertTrue(list.contains(1));
         assertTrue(list.contains(2));
         assertFalse(list.contains(3));
+        assertTrue(list.contains(null));
     }
 
     @Test
@@ -59,6 +62,11 @@ class MyArrayListTest {
 
         list.add(1);
 
+        assertFalse(list.isEmpty());
+
+        list.remove(1);
+        assertTrue(list.isEmpty());
+        list.add(null);
         assertFalse(list.isEmpty());
     }
 
