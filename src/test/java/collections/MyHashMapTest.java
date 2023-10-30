@@ -1,12 +1,13 @@
-package Collections;
+package collections;
 
-import Collections.MyHashMap.Key;
-import Collections.MyHashMap.MyHashMap;
-import Collections.MyHashMap.Value;
+import collections.myHashMap.Key;
+import collections.myHashMap.MyHashMap;
+import collections.myHashMap.Value;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class MyHashMapTest {
 

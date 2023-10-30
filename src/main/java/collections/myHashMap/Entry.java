@@ -1,4 +1,4 @@
-package Collections.MyHashMap;
+package collections.myHashMap;
 
 public class Entry {
     public Key key;

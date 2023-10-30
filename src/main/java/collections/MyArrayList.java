@@ -1,6 +1,6 @@
-package Collections;
+package collections;
 
-import Interfaces.MyCollection;
+import interfaces.MyCollection;
 
 public class MyArrayList<T> implements MyCollection<T> {
     private Object[] array;

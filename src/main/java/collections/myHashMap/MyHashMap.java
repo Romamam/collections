@@ -1,5 +1,5 @@
-package Collections.MyHashMap;
-import Collections.MyLinkedList;
+package collections.myHashMap;
+import collections.MyLinkedList;
 
 import java.util.LinkedList;
 import java.util.Objects;
