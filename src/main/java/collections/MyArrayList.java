@@ -21,6 +21,13 @@ public class MyArrayList<T> implements MyCollection<T> {
         return true;
     }
 
+    public boolean add(int index, T element){
+        System.arraycopy(array, index, array, index + 1, size - index);
+        array[index] = element;
+        size++;
+        return true;
+    }
+
     private void increaseCapacity() {
         int newCapacity = array.length * 2; // Збільшення розміру масиву удвічі
         Object[] newArray = new Object[newCapacity];
