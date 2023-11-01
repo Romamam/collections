@@ -2,6 +2,8 @@ package collections;
 
 import interfaces.MyCollection;
 
+import java.util.Objects;
+
 public class MyArrayList<T> implements MyCollection<T> {
     private Object[] array;
     private int size;
@@ -22,6 +24,7 @@ public class MyArrayList<T> implements MyCollection<T> {
     }
 
     public boolean add(int index, T element){
+        Objects.checkIndex(index, size);
         System.arraycopy(array, index, array, index + 1, size - index);
         array[index] = element;
         size++;
@@ -56,7 +59,7 @@ public class MyArrayList<T> implements MyCollection<T> {
 
     @Override
     public boolean contains(T element) {
-        for(int i = 0; i < array.length; i++){
+        for(int i = 0; i < size; i++){
             if(array[i].equals(element)){
                 return true;
             }
@@ -71,20 +74,12 @@ public class MyArrayList<T> implements MyCollection<T> {
 
     @Override
     public boolean isEmpty() {
-        if(size == 0){
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     @Override
     public T get(int index) {
-        T element = null;
-        for(int i = 0; i < array.length; i++){
-            if(i == index){
-                element = (T) array[i];
-            }
-        }
-        return element;
+        Objects.checkIndex(index, size);
+        return (T) array[index];
     }
 }
