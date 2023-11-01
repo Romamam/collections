@@ -52,7 +52,7 @@ public class MyArrayList<T> implements MyCollection<T> {
     @Override
     public boolean contains(T element) {
         for(int i = 0; i < array.length; i++){
-            if(array[i] == element){
+            if(array[i].equals(element)){
                 return true;
             }
         }
