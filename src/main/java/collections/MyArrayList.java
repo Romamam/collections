@@ -33,9 +33,7 @@ public class MyArrayList<T> implements MyCollection<T> {
         Object[] newArray = new Object[newCapacity];
 
         // Копіювання елементів зі старого масиву до нового
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
-        }
+        System.arraycopy(array, 0, newArray, 0, size);
 
         array = newArray; // Переназначення посилання на новий масив
     }
