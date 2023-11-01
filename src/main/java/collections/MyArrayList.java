@@ -42,17 +42,16 @@ public class MyArrayList<T> implements MyCollection<T> {
     }
 
     @Override
-    public boolean remove(T element) {
-        for(int i = 0; i < array.length; i++){
-            if(array[i].equals(element)){
-                for(int k = i; k < array.length-1; k++){
+    public boolean remove(T element) { // {1,2,3,4,5,6,7} remove 3    1,2,
+        for(int i = 0; i < size; i++){
+            if(Objects.equals(array[i], element)){
+                for(int k = i; k < size; k++){
                     array[k] = array[k+1];
                 }
                 array[size - 1] = null;
                 size--;
                 return true;
             }
-            else return false;
         }
         return false;
     }
@@ -60,7 +59,7 @@ public class MyArrayList<T> implements MyCollection<T> {
     @Override
     public boolean contains(T element) {
         for(int i = 0; i < size; i++){
-            if(array[i].equals(element)){
+            if(Objects.equals(array[i], element)){
                 return true;
             }
         }
