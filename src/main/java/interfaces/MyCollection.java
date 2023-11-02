@@ -1,17 +1,17 @@
 package interfaces;
 
 public interface MyCollection<T> {
-    public boolean add(T element);
+     boolean add(T element);
 
-    public void add(int index, T element);
+     void add(int index, T element);
 
-    public boolean remove(T element);
+     boolean remove(T element);
 
-    public boolean contains(T element);
+     boolean contains(T element);
 
-    public int getSize();
+     int getSize();
 
-    public boolean isEmpty();
+     boolean isEmpty();
 
-    public T get(int index);
+     T get(int index);
 }
