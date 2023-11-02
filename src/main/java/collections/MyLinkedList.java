@@ -1,9 +1,11 @@
 package collections;
 
 
+import interfaces.MyCollection;
+
 import java.util.Objects;
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T> implements MyCollection<T> {
 
     static class Node<T>{
         T element;
@@ -19,7 +21,7 @@ public class MyLinkedList<T> {
     private int size;
 
 
-    public void add(T element) {
+    public boolean add(T element) {
         Node<T> newNode = new Node<>(element);
         if(size == 0){
             first = last = newNode;
@@ -29,9 +31,11 @@ public class MyLinkedList<T> {
             last = newNode;
         }
         size++;
+        return true;
     }
 
     private Node<T> getNodeByIndex(int index){
+        Objects.checkIndex(index, size);
         Node<T> current = first;
         for (int i = 0; i < index; i++) {
             current = current.next;
@@ -63,7 +67,7 @@ public class MyLinkedList<T> {
     }
 
 
-    public T remove(int index) {
+    public T removeIndex(int index) {
         Objects.checkIndex(index, size);
         T removedElement = null;
         if(index == 0){
@@ -84,6 +88,50 @@ public class MyLinkedList<T> {
         return removedElement;
     }
 
+    public boolean remove(T element){
+        if(element == null){
+            Node<T> current = first;
+            Node<T> prev = null;
+
+            while (current != null){
+                if(Objects.equals(element, current.element)) {
+                    unLink(current, prev);
+                    return true;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }else {
+            Node<T> current = first;
+            Node<T> prev = null;
+
+            while (current != null) {
+                if (element.equals(current.element)) {
+                    unLink(current, prev);
+                    return true;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }
+        return false;
+    }
+
+    private void unLink(Node<T> current, Node<T> prev) {
+        if(current.element == null){
+            if (prev == null) {
+                first = current.next;
+            } else {
+                prev.next = current.next;
+            }
+
+            if (current.next == null) {
+                last = prev;
+            }
+            size--;
+        }
+    }
+
     public boolean contains(T element) {
         Node<T> current = first;
         for (int i = 0; i < size; i++) {
@@ -95,18 +143,16 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public int size() {
+    public int getSize() {
         return size;
     }
 
     public boolean isEmpty() {
-        if(size == 0){
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     public T get(int index) {
+        Objects.checkIndex(index, size);
         return getNodeByIndex(index).element;
     }
 }
