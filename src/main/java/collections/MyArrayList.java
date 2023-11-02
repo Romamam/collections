@@ -23,12 +23,14 @@ public class MyArrayList<T> implements MyCollection<T> {
         return true;
     }
 
-    public boolean add(int index, T element){
+    public void add(int index, T element){
         Objects.checkIndex(index, size);
+        if(size == array.length) {
+            increaseCapacity();
+        }
         System.arraycopy(array, index, array, index + 1, size - index);
         array[index] = element;
         size++;
-        return true;
     }
 
     private void increaseCapacity() {
@@ -42,7 +44,7 @@ public class MyArrayList<T> implements MyCollection<T> {
     }
 
     @Override
-    public boolean remove(T element) { // {1,2,3,4,5,6,7} remove 3    1,2,
+    public boolean remove(T element) {
         for(int i = 0; i < size; i++){
             if(Objects.equals(array[i], element)){
                 for(int k = i; k < size; k++){

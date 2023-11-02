@@ -16,17 +16,21 @@ class MyArrayListTest {
 
     @Test
     void testAdd() {
-        assertTrue(list.add(1));
         assertTrue(list.add(2));
-        assertEquals(2, list.getSize());
+        assertTrue(list.add(1));
+        list.add(1, 22);
+        assertEquals(22, list.get(1));
+        assertEquals(3, list.getSize());
     }
 
     @Test
     void testRemove() {
         list.add(1);
         list.add(2);
+        list.add(null);
         assertTrue(list.remove(1));
-        assertEquals(1,list.getSize());
+        assertEquals(2,list.getSize());
+        assertTrue(list.remove(null));
         assertFalse(list.remove(3));
         assertFalse(list.remove(5));
 
