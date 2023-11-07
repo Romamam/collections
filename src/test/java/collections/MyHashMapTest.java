@@ -1,6 +1,5 @@
 package collections;
 
-import collections.myhashmap.MyHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
