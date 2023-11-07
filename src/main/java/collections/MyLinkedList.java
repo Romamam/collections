@@ -78,7 +78,7 @@ public class MyLinkedList<T> implements MyCollection<T> {
             }
         }else {
             Node<T> prev = getNodeByIndex(index - 1);
-            T element = prev.element;
+            removedElement = prev.next.element;
             prev.next = prev.next.next;
             if(index == size -1){
                 last = prev;
@@ -128,8 +128,8 @@ public class MyLinkedList<T> implements MyCollection<T> {
             if (current.next == null) {
                 last = prev;
             }
-            size--;
         }
+        size--;
     }
 
     public boolean contains(T element) {

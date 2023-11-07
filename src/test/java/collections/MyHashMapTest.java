@@ -1,13 +1,10 @@
 package collections;
 
-import collections.myHashMap.Key;
-import collections.myHashMap.MyHashMap;
-import collections.myHashMap.Value;
+import collections.myhashmap.MyHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MyHashMapTest {
 
@@ -21,21 +18,44 @@ class MyHashMapTest {
 
     @Test
     void testPutAndGet() {
-        map.put(new Key(1), new Value(1111));
-        map.put(new Key(22), new Value(222));
-        map.put(new Key(14), new Value(3333));
-        assertEquals(1111,map.get(new Key(1)).getValue());
-        assertEquals(222,map.get(new Key(22)).getValue());
-
+        map.put("ABC", 12);
+        assertEquals(12, map.get("ABC"));
+        map.put(null, 12213);
+        assertEquals(12213, map.get(null));
+        assertNull(map.get("R"));
     }
 
     @Test
-    void remove() {
-        map.put(new Key(1), new Value(1111));
-        map.put(new Key(22), new Value(222));
-        map.remove(new Key(1));
-        map.remove(new Key(22));
-        assertFalse(map.containsKey(new Key(1)));
-        assertFalse(map.containsKey(new Key(22)));
+    void testRemove() {
+    map.put("A", 12);
+    map.put(null, 1);
+    assertEquals(2, map.size());
+    assertEquals(1, map.remove(null));
+    assertEquals(12,map.remove("A"));
+    assertNull(map.remove("B"));
+    assertEquals(0, map.size());
     }
+
+    @Test
+    void testSize(){
+        map.put("one", 1);
+        map.put("two", 2);
+        assertEquals(2, map.size());
+        map.put("three", 3);
+        assertEquals(3, map.size());
+        map.remove("two");
+        assertEquals(2, map.size());
+    }
+
+    @Test
+    void containsKey(){
+        map.put(null, 12);
+        map.put("ASS", 121);
+        map.put("AVC", 13);
+        map.put("ABC", 12);
+        assertTrue(map.containsKey(null));
+        assertTrue(map.containsKey("ABC"));
+        assertFalse(map.containsKey("AA"));
+    }
+
 }
