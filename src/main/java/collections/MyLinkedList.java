@@ -1,6 +1,11 @@
+package collections;
+
+
+import interfaces.MyCollection;
+
 import java.util.Objects;
 
-public class LinkedList<T> implements MyCollection<T> {
+public class MyLinkedList<T> implements MyCollection<T> {
 
     static class Node<T>{
         T element;
@@ -15,26 +20,22 @@ public class LinkedList<T> implements MyCollection<T> {
     private Node<T> last;
     private int size;
 
-    @Override
-    public void add(T element) {
 
-    }
-
-    @Override
-    public void add(T element, int index) {
+    public boolean add(T element) {
         Node<T> newNode = new Node<>(element);
         if(size == 0){
             first = last = newNode;
         }
         else{
-            Node<T> prev = getNodeByIndex(index-1);
             last.next = newNode;
             last = newNode;
         }
         size++;
+        return true;
     }
 
     private Node<T> getNodeByIndex(int index){
+        Objects.checkIndex(index, size);
         Node<T> current = first;
         for (int i = 0; i < index; i++) {
             current = current.next;
@@ -47,7 +48,6 @@ public class LinkedList<T> implements MyCollection<T> {
         Node<T> node = getNodeByIndex(index);
         node.element = element;
     }
-    @Override
     public void add(int index, T element){
         Node<T> newNode = new Node<>(element);
         if(first == null){
@@ -59,22 +59,15 @@ public class LinkedList<T> implements MyCollection<T> {
             last.next = newNode;
             last = newNode;
         }else {
-            Node<T> current = first;
-            for (int i = 0; i < index; i++) {
-                current = current.next;
-            }
-            newNode.next = current.next;
-            current.next = newNode;
+            Node<T> prev = getNodeByIndex(index-1);
+            newNode.next = prev.next;
+            prev.next = newNode;
         }
+        size++;
     }
 
-    @Override
-    public boolean remove(T element) {
-        return false;
-    }
 
-    @Override
-    public T remove(int index) {
+    public T removeIndex(int index) {
         Objects.checkIndex(index, size);
         T removedElement = null;
         if(index == 0){
@@ -85,7 +78,7 @@ public class LinkedList<T> implements MyCollection<T> {
             }
         }else {
             Node<T> prev = getNodeByIndex(index - 1);
-            T element = prev.element;
+            removedElement = prev.next.element;
             prev.next = prev.next.next;
             if(index == size -1){
                 last = prev;
@@ -95,7 +88,50 @@ public class LinkedList<T> implements MyCollection<T> {
         return removedElement;
     }
 
-    @Override
+    public boolean remove(T element){
+        if(element == null){
+            Node<T> current = first;
+            Node<T> prev = null;
+
+            while (current != null){
+                if(Objects.equals(element, current.element)) {
+                    unLink(current, prev);
+                    return true;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }else {
+            Node<T> current = first;
+            Node<T> prev = null;
+
+            while (current != null) {
+                if (element.equals(current.element)) {
+                    unLink(current, prev);
+                    return true;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }
+        return false;
+    }
+
+    private void unLink(Node<T> current, Node<T> prev) {
+        if(current.element == null){
+            if (prev == null) {
+                first = current.next;
+            } else {
+                prev.next = current.next;
+            }
+
+            if (current.next == null) {
+                last = prev;
+            }
+        }
+        size--;
+    }
+
     public boolean contains(T element) {
         Node<T> current = first;
         for (int i = 0; i < size; i++) {
@@ -107,18 +143,16 @@ public class LinkedList<T> implements MyCollection<T> {
         return false;
     }
 
-    @Override
-    public int size() {
-        return 0;
+    public int getSize() {
+        return size;
     }
 
-    @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
-    @Override
     public T get(int index) {
+        Objects.checkIndex(index, size);
         return getNodeByIndex(index).element;
     }
 }
